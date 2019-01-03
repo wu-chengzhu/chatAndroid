@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        app:showAsAction="always"
+        android:title="查询"
+        android:orderInCategory="1" />
+    <item
+        android:id="@+id/add"
+        app:showAsAction="always"
+        android:title="添加"
+        android:orderInCategory="2" >
+        <menu>
+            <item
+                android:id="@+id/addper"
+                app:showAsAction="always"
+                android:title="加好友"
+                android:orderInCategory="1" />
+
+        </menu>
+    </item>
+</menu>

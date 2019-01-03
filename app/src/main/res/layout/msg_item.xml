@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="10dp">
+    <LinearLayout
+        android:id="@+id/left_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+        <TextView
+            android:id="@+id/msg_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="fdffsd"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+        <TextView
+            android:id="@+id/msg_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="fsddsfss"
+           />
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="10dp">-->
+
+    <!--&lt;!&ndash;左边对话框&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/left_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="left">-->
+
+        <!--&lt;!&ndash;   app:bubbleColor="@color/colorPrimary"&ndash;&gt;-->
+        <!--<com.xujiaji.happybubble.BubbleLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/bubble_left_Layout"-->
+            <!--android:layout_width="232dp"-->
+            <!--android:layout_height="55dp"-->
+            <!--android:layout_margin="16dp"-->
+
+
+            <!--app:lookAt="left"-->
+            <!--app:lookLength="16dp"-->
+            <!--app:lookPosition="20dp"-->
+            <!--app:lookWidth="16dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/msg_left"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:textColor="#fff" />-->
+        <!--</com.xujiaji.happybubble.BubbleLayout>-->
+    <!--</LinearLayout>-->
+
+
+    <!--&lt;!&ndash; app:bubbleColor="@color/colorAccent"&ndash;&gt;-->
+    <!--&lt;!&ndash;右边对话框&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/right_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="right">-->
+
+        <!--<com.xujiaji.happybubble.BubbleLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/bubble_right_Layout"-->
+            <!--android:layout_width="232dp"-->
+            <!--android:layout_height="55dp"-->
+            <!--android:layout_margin="16dp"-->
+
+
+            <!--app:lookAt="right"-->
+            <!--app:lookLength="16dp"-->
+            <!--app:lookPosition="20dp"-->
+            <!--app:lookWidth="16dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/msg_right"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="fdsfsfdsfdfdfsdfs" />-->
+        <!--</com.xujiaji.happybubble.BubbleLayout>-->
+    <!--</LinearLayout>-->
+<!--</LinearLayout>-->

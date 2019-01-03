@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_news"
+
+        android:title="news" />
+
+    <item
+        android:id="@+id/navigation_contacts"
+
+        android:title="contacts" />
+
+    <item
+        android:id="@+id/navigation_me"
+
+        android:title="me" />
+
+</menu>
