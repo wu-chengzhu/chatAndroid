@@ -31,6 +31,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 登录的Activity
+ */
 public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView register;
@@ -42,20 +45,6 @@ public class LoginActivity extends AppCompatActivity {
     //private TextView forget;
     static public int id;//记录这个用户的Id是多少  后面要用到
     public static final int SHOW_RESPONSE = 1;
-
-//    public Handler handler=new Handler() {
-//        public void handleMessage(Message msg)
-//        {
-//            switch (msg.what){
-//                case SHOW_RESPONSE:
-//                    String response=(String)msg.obj;
-//                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,71 +80,36 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-//    private void sendRequestWithOkHttp() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    OkHttpClient client = new OkHttpClient();//建立一个OKhttpClient对象
-////                    Map<String,String> map=new HashMap<>();
-////                    map.put("user","wcz");
-////                    map.put("pass","123");
-////                    Gson gson=new GsonBuilder().enableComplexMapKeySerialization().create();//生成的Gson对象能够让map序列化
-////                    String json=gson.toJson(map);//把map转成json数据类型
-//                   // final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//                  //  RequestBody body=RequestBody.create(JSON,json);//创建一个请求对象，里面包含json数据类型的数据
-//
-//                    Request request = new Request.Builder().url("http://192.168.43.98:88/Login").build(); //建立连接
-//                          //  .post(body)//把数据传给服务器
-//
-//                    Response response = client.newCall(request).execute();//获得返回的请求对象
-//                    String responseData = response.body().string();//获得身体部分的信息
-//                   // Boolean result= gson.fromJson(responseData,Boolean.class);
-//                    showResponse(responseData+"");
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//    }
-
-
     private void sendRequestWithOkHttp() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();//建立一个okHttpClient对象
-//                  //  Request request = new Request.Builder().url("http://192.168.32.1:88/Login").build();
-                    username = uid.getText().toString().trim();
-                    password = pwd.getText().toString().trim();
+                    username = uid.getText().toString().trim();//拿到输入的用户名
+                    password = pwd.getText().toString().trim();//拿到输入的密码
                     Log.v("test:", "用户名" + username + " ");
                     Log.v("test:", "用户名" + password + " ");
-                    Map<String, String> map = new HashMap<>();
-                    map.put("user", username);
-                    map.put("pass", password);
+                    Map<String, String> map = new HashMap<>();//建一个Map
+                    map.put("user", username);//把用户名放进去
+                    map.put("pass", password);//把密码放进去
                     Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();//生成的Gson对象能够让map序列化
                     String json = gson.toJson(map);//把map转成json数据类型
                     final MediaType JSON = MediaType.parse("application/json; charset=utf-8");//描述请求/响应的内容类型
                     RequestBody body = RequestBody.create(JSON, json);//创建一个请求对象，里面包含json数据类型的数据
-//
-//                     //final String responseData;
-                    Request request = new Request.Builder().url("http://192.168.32.1:88/Login")
+                    Request request = new Request.Builder().url("http://192.168.32.1:88/Login")//向服务器发送请求
                             .post(body)//把数据传给服务器
                             .build();
-
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-
-                    id = gson.fromJson(responseData, Integer.class);
+                    Response response = client.newCall(request).execute();//接收返回的响应
+                    String responseData = response.body().string();//拿到响应的内容
+                    id = gson.fromJson(responseData, Integer.class);//把传回的数据转成int类型格式
                     if (id < 0) //用户名
                     {
                         showResponse("用户名或密码输入错误，请重新输入。");
-                    } else {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                    } else {//用户名密码正确就开启主界面
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);//从登录界面跳转到主界面
+                        startActivity(intent);//开启新的activity
+                        finish();//把登录界面结束掉
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

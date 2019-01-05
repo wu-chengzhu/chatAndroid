@@ -3,6 +3,9 @@ package com.example.gp62.test.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 消息list
+ */
 public class MessageList {
     private Friend friend;
     private ArrayList<String> messageList;

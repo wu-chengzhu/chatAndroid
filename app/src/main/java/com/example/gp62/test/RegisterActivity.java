@@ -50,7 +50,7 @@ import okhttp3.Response;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * 注册界面
  */
 public class RegisterActivity extends AppCompatActivity  {
     private Button login;
@@ -60,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity  {
     private TextView textView;
     private String username;
     private String password;
+    private TextView back;
 
 
     @Override
@@ -71,16 +72,22 @@ public class RegisterActivity extends AppCompatActivity  {
         textView=findViewById(R.id.infor);//提示框
         uid=findViewById(R.id.userId);
         pwd=findViewById(R.id.userPassword);
+        back=findViewById(R.id.back);
 
 
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);//返回登录界面
+                startActivity(intent);
+                finish();
+            }
+        });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 sendRequestWithOkHttp();
-//                Intent intent=new Intent(MainActivity.this,ClientActivity.class);
-//                startActivity(intent);
-//                finish();
+                 sendRequestWithOkHttp();//发送注册请求
             }
         });
 
@@ -92,33 +99,25 @@ public class RegisterActivity extends AppCompatActivity  {
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();
-//                  //  Request request = new Request.Builder().url("http://192.168.32.1:88/Login").build();
-                    username=uid.getText().toString().trim();
-                    password=pwd.getText().toString().trim();
+                    username=uid.getText().toString().trim();//拿到输入的用户名
+                    password=pwd.getText().toString().trim();//拿到输入的密码
                     Log.v("test:","用户名"+username+" ");
                     Log.v("test:","用户名"+password+" ");
-
-
-                    RequestBody requestBody = new FormBody.Builder().add("user",username).
+                    RequestBody requestBody = new FormBody.Builder().add("user",username).//建一个请求对象里面放用户名和密码
                             add("pass", password).build();
-
-//                     //final String responseData;
                     Request request = new Request.Builder().url("http://192.168.32.1:88/register")
                             .post(requestBody)
-                            .build();
-
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-
+                            .build();//向注册的servlet发送请求
+                    Response response = client.newCall(request).execute();//拿到返回的响应对象
+                    String responseData = response.body().string();//拿到json字符串
                     Gson gson=new GsonBuilder().create();
-                    Boolean result=gson.fromJson(responseData,Boolean.class);
+                    Boolean result=gson.fromJson(responseData,Boolean.class);//转成最后的注册结果
                     if(result==false) //用户名
                     {
                         showResponse("注册失败,该用户名已经有了");
-                        //return ;
                     }
                     else{
-                        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);//跳转到登录界面
                         startActivity(intent);
                         finish();
                     }

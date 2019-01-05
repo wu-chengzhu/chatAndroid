@@ -4,6 +4,9 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
+/**
+ * 消息的实体
+ */
 public class Message implements Serializable,Comparable<Message> {
     private  int sender;
     private  int receiver;

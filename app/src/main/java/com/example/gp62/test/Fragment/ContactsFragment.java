@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.gp62.test.R;
 
+/**
+ * 联系人的Fragment
+ */
 public class ContactsFragment extends Fragment {
     @Nullable
     @Override

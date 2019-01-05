@@ -39,7 +39,9 @@ import okhttp3.Response;
 import static com.example.gp62.test.MessageActivity.adapter;
 import static com.example.gp62.test.MessageActivity.msgRecyclerView;
 
-
+/**
+ * 消息列表的Fragment
+ */
 public class NewsFragment extends Fragment {
 
     private ListView listView;
@@ -134,44 +136,28 @@ public class NewsFragment extends Fragment {
             @Override
             public void run() {
                 try {
-
                     while (!Thread.interrupted()) {
-
-                        OkHttpClient client = new OkHttpClient();
+                        OkHttpClient client = new OkHttpClient();//new一个OkHttpClient对象用来建立请求的连接
+                        //设置请求主体的参把它自己的id作为参数发过去
                         RequestBody requestBody = new FormBody.Builder().add("selfId", LoginActivity.id + "").build();
-
-//                     //final String responseData;
                         Request request = new Request.Builder().url("http://192.168.32.1:88/message")
                                 .post(requestBody)
-                                .build();
-
-
-                        Response response = client.newCall(request).execute();
-                        String responseData = response.body().string();
-
-                        Gson gson = new Gson();
-
-                        // ArrayList<Message> msgList = new ArrayList<Message>();
+                                .build();//想消息servlet发送请求
+                        Response response = client.newCall(request).execute();//拿到响应的对象
+                        String responseData = response.body().string();//拿出json格式数据
+                        Gson gson = new Gson();//new一个Gson对象
                         String s;
                          amsg = gson.fromJson(responseData, new TypeToken<ArrayList<Message>>() {}.getType());//取出消息的数据
-                        for (int i = 0; i < amsg.size(); i++) {
+                        for (int i = 0; i < amsg.size(); i++) {//遍历消息的list
                             Message msg = amsg.get(i);//得到消息中的一个
                             Log.v("message", msg.toString());//
-                            android.os.Message message=new android.os.Message();
-                            message.what=0x123;
-                            Bundle bundle=new Bundle();
-                            bundle.putString("msg",msg.getMsg());
-                            message.setData(bundle);
-                            MessageActivity.handler.sendMessage(message);
-//
-//                            showResponse(s);
-                          // MessageActivity.msgList.add(new Msg(msg.getMsg(),Msg.TYPE_RECEIVED));
-//                            MessageActivity.adapter.notifyItemInserted(MessageActivity.msgList.size()-1);//当有新消息时，刷新ListView中的显示
-//                            MessageActivity.msgRecyclerView.scrollToPosition(MessageActivity.msgList.size()-1);//将ListView定位到最后一行
-
+                            android.os.Message message=new android.os.Message();//建一个在andorid中发送消息的对象
+                            message.what=0x123;//设置消息的类型
+                            Bundle bundle=new Bundle();//new Bundle
+                            bundle.putString("msg",msg.getMsg());//把消息放入篮子
+                            message.setData(bundle);//传递消息的把bundle设置为数据
+                            MessageActivity.handler.sendMessage(message);//向MessageActivity发送数据
                         }
-
-
                         Thread.sleep(2000);
                     }
                 } catch (Exception e) {

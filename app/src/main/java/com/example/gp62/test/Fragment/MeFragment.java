@@ -13,7 +13,9 @@ import android.widget.Button;
 
 import com.example.gp62.test.R;
 
-
+/**
+ * 基本设置的Fragment
+ */
 public class MeFragment extends Fragment {
 
     @Nullable

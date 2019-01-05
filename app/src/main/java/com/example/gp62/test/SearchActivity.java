@@ -19,6 +19,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 查询好友的Activity
+ */
 public class SearchActivity extends AppCompatActivity {
 
     private Button back;
@@ -34,21 +37,18 @@ public class SearchActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent=new Intent(SearchActivity.this,MainActivity.class);
+               Intent intent=new Intent(SearchActivity.this,MainActivity.class);//点back 就返回到主activity
                 startActivity(intent);
                 finish();
             }
         });
-
-
         // 设置搜索文本监听
         searchV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.v("SearchView","onQueryTextSubmit 被调用");
-                sfiRequest(query);
-
+                sfiRequest(query);//向服务器端发送请求
                 return false;
             }
 
@@ -57,7 +57,6 @@ public class SearchActivity extends AppCompatActivity {
                 Log.v("SearchView","onQueryTextChange 被调用");
                 return false;
             }
-
 
         });
     }
@@ -68,18 +67,14 @@ public class SearchActivity extends AppCompatActivity {
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();
-//                  //  Request request = new Request.Builder().url("http://192.168.32.1:88/Login").build();
                    String searchName=query;
-                    RequestBody requestBody = new FormBody.Builder().add("friendName",searchName).build();
-
-//                     //final String responseData;
+                    RequestBody requestBody = new FormBody.Builder().add("friendName",searchName).build();//请求中添加朋友的用户名
                     Request request = new Request.Builder().url("http://192.168.32.1:88/addfriend")
                             .post(requestBody)
-                            .build();
-
+                            .build();//向处理加好友的servlet发送请求
+                    //拿到返回的json的数据
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    //Log.v("result","fdfd"+responseData);
                     Gson gson=new GsonBuilder().create();;//创建一个Gson对象
 
                     Boolean searchResult=gson.fromJson(responseData,Boolean.class);
@@ -91,9 +86,9 @@ public class SearchActivity extends AppCompatActivity {
                     else
                     {
                         Log.v("result","有这个用户");
-                        Intent intent=new Intent(SearchActivity.this,AddFriendActivity.class);//new 一个intent对象
+                        Intent intent=new Intent(SearchActivity.this,AddFriendActivity.class);//跳转到添加好友的界面
                         startActivity(intent);//开启一个activity
-                        finish();
+                        finish();//结束当前界面
                     }
 
                 } catch (Exception e) {

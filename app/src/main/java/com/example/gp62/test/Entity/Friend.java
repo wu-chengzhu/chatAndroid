@@ -1,5 +1,8 @@
 package com.example.gp62.test.Entity;
 
+/**
+ * 朋友类
+ */
 public class Friend {
     private int id;
     private String friendName;

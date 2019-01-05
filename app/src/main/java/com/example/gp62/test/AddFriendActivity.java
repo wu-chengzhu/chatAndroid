@@ -20,7 +20,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
+/**
+ * 显示朋友信息和添加按钮的界面
+ */
 public class AddFriendActivity extends AppCompatActivity {
    private TextView userName;
    private  TextView userID;
@@ -104,12 +106,9 @@ public class AddFriendActivity extends AppCompatActivity {
                     String responseData = response.body().string();
                     //Log.v("result","fdfd"+responseData);
                     Gson gson=new GsonBuilder().create();;//创建一个Gson对象
-
                     Boolean searchResult=gson.fromJson(responseData,Boolean.class);
                     if(searchResult==false)
                     {
-                      //  System.out.print("加好友失败");
-                     //   Log.v("a","没有这个用户");
                         System.out.println("加好友失败");
                        showAddResult("加好友失败");
                     }

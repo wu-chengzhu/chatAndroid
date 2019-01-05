@@ -1,5 +1,8 @@
 package com.example.gp62.test.Entity;
 
+/**
+ * 判断消息是接收或发送的实体类
+ */
 public class Msg {
     public static final int TYPE_RECEIVED=0;
     public static final int TYPE_SENT=1;

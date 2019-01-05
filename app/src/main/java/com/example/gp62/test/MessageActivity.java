@@ -30,6 +30,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 聊天界面
+ */
 public class MessageActivity extends AppCompatActivity {
         public static List<Msg> msgList=new ArrayList<>();
         private EditText inputText;
@@ -38,7 +41,7 @@ public class MessageActivity extends AppCompatActivity {
         public static MsgAdapter adapter;
          public static Handler  handler=new Handler() {
         public void handleMessage(android.os.Message msg)
-        {
+        {//消息接收处理
            if(msg.what==0x123)
            {
                Bundle bundle=msg.getData();
@@ -49,10 +52,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         }
     };
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +65,6 @@ public class MessageActivity extends AppCompatActivity {
         msgRecyclerView.setLayoutManager(layoutManager);
         adapter=new MsgAdapter(msgList);//new 一个adapter 并给它数据
         msgRecyclerView.setAdapter(adapter);
-
-//        Intent intent = getIntent();
-//        //通过Intent获得携带的数据Bundle
-//        Bundle data = intent.getExtras();
-//        //从Bundle中获得对应数据
-//             msgList.add(new Msg(data.getString("message"),Msg.TYPE_RECEIVED));
-//        adapter.notifyItemInserted(MessageActivity.msgList.size()-1);//当有新消息时，刷新ListView中的显示
-//        msgRecyclerView.scrollToPosition(MessageActivity.msgList.size()-1);//将ListView定位到最后一行
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,18 +72,15 @@ public class MessageActivity extends AppCompatActivity {
                 if(!"".equals(content))//不为空消息
                 {
                     Msg msg=new Msg(content,Msg.TYPE_SENT);
-                    msgList.add(msg);
+                    msgList.add(msg);//消息显示数组中添加这个消息
                     adapter.notifyItemInserted(MessageActivity.msgList.size()-1);//当有新消息时，刷新ListView中的显示
                     msgRecyclerView.scrollToPosition(MessageActivity.msgList.size()-1);//将ListView定位到最后一行
-
                     inputText.setText("");//清空输入框中的内容
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 OkHttpClient client = new OkHttpClient();//建立一个okHttpClient对象
-
-
                                 RequestBody requestBody;
                                 if(LoginActivity.id!=2)
                                 {
@@ -104,8 +92,6 @@ public class MessageActivity extends AppCompatActivity {
                                     requestBody = new FormBody.Builder().add("sender",""+LoginActivity.id).
                                             add("receiver",1+"").add("msg",content).build();
                                 }
-
-
 
                                 //final String responseData;
                                 Request request = new Request.Builder().url("http://192.168.32.1:88/message")
